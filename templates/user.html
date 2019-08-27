@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+
+<li><a href="/logout">Logout</a></li>
+<li><a href="/secret">Secret</a></li>
+
+
+
+<ul>
+  <li>{{ user.first_name }}</li>
+  <li>{{ user.last_name }}</li>
+  <li>{{ user.username }}</li>
+  <li>{{ user.email }}</li>
+</ul>
+
+
+<h1>You Made It!!</h1>
+
+{% endblock content %}

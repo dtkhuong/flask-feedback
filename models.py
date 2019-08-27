@@ -1,10 +1,10 @@
 """ Models for Feedback App."""
 
 from flask_sqlalchemy import SQLAlchemy
-import bcrypt
+from flask_bcrypt import Bcrypt
 
 db = SQLAlchemy()
-# bcrypt = Bcrypt()
+bcrypt = Bcrypt()
 
 
 class User(db.Model):
@@ -26,6 +26,16 @@ class User(db.Model):
         hashed_utf8 = hashed.decode("utf8")
 
         return cls(username=username, password=hashed_utf8)
+
+    @classmethod
+    def authenticate(cls, username, password):
+        """Validate that user exists and password is correct"""
+
+        u = User.query.filter_by(username=username).first()
+        if u and bcrypt.check_password_hash(u.password, password):
+            return u
+        else:
+            return False
 
 
 def connect_db(app):
