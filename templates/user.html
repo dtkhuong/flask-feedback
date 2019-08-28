@@ -16,7 +16,28 @@
   <li>{{ user.email }}</li>
 </ul>
 
+<div>
+  {% for note in feedback %}
+  <li>
+    <h3>{{ note.title }}</h3>
+    <p>{{ note.content }}</p>
+  </li>
+  <a href="/feedback/{{note.id}}/update"><button class="btn btn-primary">Edit your feedback</button></a>
+  <form action="/feedback/{{note.id}}/delete" method="POST">
+  <button type="submit" class="btn btn-danger">Delete your feedback</button>
+  </form>
+  {% endfor %}
+</div>
+
+
+<a href="/users/{{user.username}}/feedback/add"><button class="btn btn-primary">Add your feedback</button></a>
+
+<form action="/users/{{user.username}}/delete" method="POST">
+  <button type="submit" class="btn btn-danger">Delete your User profile</button>
+</form>
 
 <h1>You Made It!!</h1>
 
 {% endblock content %}
+
+<a href=""></a>
